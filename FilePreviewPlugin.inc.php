@@ -121,8 +121,7 @@ class FilePreviewPlugin extends GenericPlugin {
 				null
 			),
 		);
-
-		error_log("Sigo de largo");
+		
 	}
 
 	/**
@@ -165,7 +164,7 @@ class FilePreviewPlugin extends GenericPlugin {
 			array(
 				new LinkAction(
 					'status',
-					new AjaxModal($router->url($request, null, null, 'plugins.generic.filePreview.manage', null,
+					new AjaxModal($router->url($request, null, null, 'manage', null,
 					array(
 						'verb' => 'preview',
 						'plugin' => $this->getName(),
