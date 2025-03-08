@@ -3,9 +3,9 @@
 /**
  * @file FilePreviewForm.inc.php
  *
- * Copyright (c) 2015-2019 University of Pittsburgh
- * Copyright (c) 2014-2021 Simon Fraser University
+ * Copyright (c) 2013-2021 Simon Fraser University
  * Copyright (c) 2003-2021 John Willinsky
+ * Copyright (c) 2023 Universidad Nacional de Lanus
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class FilePreviewForm
@@ -29,9 +29,8 @@ class FilePreviewForm extends Form {
 	 * @param $plugin object
 	 * @param $contextId int
 	 */
-	function __construct($plugin, $contextId) {
+	function __construct($plugin, $contextId, $args) {
 		$this->contextId = $contextId;
-		$this->plugin = $plugin;
 		parent::__construct($plugin->getTemplateResource('filePreview.tpl'));
 
 	}
@@ -42,25 +41,13 @@ class FilePreviewForm extends Form {
 	function initData() {
 		$contextId = $this->contextId;
 		$plugin =& $this->plugin;
-		$this->_data = array();
 	}
-
 
 	/**
 	 * Fetch the form.
 	 * @copydoc Form::fetch()
 	 */
 	function fetch($request, $template = null, $display = false) {
-		$contextId = $request->getContext()->getId();
-		//$clientId = $this->plugin->getSetting($contextId, 'orcidClientId');
-		//$clientSecret = $this->plugin->getSetting($contextId, 'orcidClientSecret');
-
-		$templateMgr = TemplateManager::getManager($request);
-		//$aboutUrl = $request->getDispatcher()->url($request, ROUTE_PAGE, null, 'orcidapi', 'about', null);
-		$templateMgr->assign(array(
-			'globallyConfigured' => "test",
-			'orcidAboutUrl' => "test",
-		));
 		return parent::fetch($request, $template, $display);
 	}
 

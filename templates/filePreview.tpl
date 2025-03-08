@@ -1,12 +1,12 @@
 {**
- * templates/settingsForm.tpl
+ * templates/filePreview.tpl
  *
- * Copyright (c) 2015-2019 University of Pittsburgh
- * Copyright (c) 2014-2021 Simon Fraser University
+ * Copyright (c) 2013-2021 Simon Fraser University
  * Copyright (c) 2003-2021 John Willinsky
+ * Copyright (c) 2023 Universidad Nacional de Lanus
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
- * ORCID Profile plugin settings
+ * File Preview Plugin modal page
  *
  *}
 
@@ -17,8 +17,16 @@
  {rdelim});
 </script>
 
-<div id="filePreviewPdf">
-	<iframe src="http://www.repositoriojmr.unla.edu.ar/descarga/TFI/EsEpi/029492_Perner.pdf" id="iframePDF" frameborder="0" scrolling="no" width="100%" height="700px"></iframe>
-	<!--iframe src="http://localhost/ojs/index.php/saludcolectiva/$$$call$$$/api/file/file-api/download-file?submissionFileId=15811&submissionId=4365&stageId=1" id="iframePDF" frameborder="0" scrolling="no" width="100%" height="700px"></iframe-->
-</div>
+<script type="text/javascript">
+// Creating iframe's src in JS instead of Smarty so that EZProxy-using sites can find our domain in $pdfUrl and do their rewrites on it.
+$(document).ready(function() {ldelim}
+	var urlBase = "{$pluginUrl}/pdf.js/web/viewer.html?file=";
+	var pdfUrl = {$fileUrl|json_encode};
+	{$pdfUrl}
+	$("#pdfCanvasContainer > iframe").attr("src", urlBase + encodeURIComponent(pdfUrl));
+{rdelim});
+</script>
 
+<div id="pdfCanvasContainer" class="galley_view">
+	<iframe src="" width="100%" height="100%" style="min-height: 600px;" title="{$galleyTitle}" allowfullscreen webkitallowfullscreen></iframe>
+</div>
